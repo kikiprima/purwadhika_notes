@@ -1,0 +1,16 @@
+<script>
+    const totalBelanja = 100000
+    let isFailed = false
+    do{
+        // 1. Show Prompt
+        const uangUser = Number(prompt(`Total Belanja = ${totalBelanja}. Masukan Uang Anda`))
+        // 2. Show Alert -> 1. Condition Succes 2. Condition Failed
+        if(uangUser >= totalBelanja){
+            alert(`Success! Uang Kembalian Anda = ${uangUser - totalBelanja}`)
+            isFailed = false
+        }else {
+            alert('Failed')
+            isFailed = true
+        }
+    }while(isFailed === true)
+</script>

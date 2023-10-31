@@ -1,0 +1,14 @@
+<script>
+    let success = false
+    let totalBelanja = 100000
+    while (success == false){
+       let uangPembeli = Number(prompt(`Total Belanja Rp.${totalBelanja}, Masukan Uang Anda `))
+    if (uangPembeli < totalBelanja) {alert('Saldo Anda Tidak Mencukupi, Silahkan Coba Lagi')
+       success = false}
+    else if (uangPembeli == totalBelanja) {alert('Transaksi Berhasil, Saldo Anda Mencukupi')
+       success = true}  
+    else {let uangKembali = uangPembeli - totalBelanja
+       {alert('Transaksi Berhasil,Sisa saldo anda: Rp' + uangKembali)
+       success = true}
+    }}
+</script>
