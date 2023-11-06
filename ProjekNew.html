@@ -1,0 +1,88 @@
+<script>
+    class Users {
+        constructor(id, username, password){
+            this.id = id
+            this.username = username
+            this.password = password
+        }
+    }
+    const databaseUsers = [
+        new Users(1, "admin", "1234"),
+        new Users(2, "user", "1234"),
+    ]
+    
+    class Products {
+        constructor(id, productName, productPrice, productUnit){
+            this.id = id
+            this.productName = productName
+            this.productPrice = productPrice
+            this.productUnit = productUnit
+        }
+    }
+    
+    const databaseProducts = [
+        new Products(1, "Mangga", 10000, "Kg"),
+        new Products(2, "Jeruk", 15000, "Unit"),
+    ]
+    const showProducts = () => {
+            let showProducts = ""
+            for(let i=0; i<databaseProducts.length; i++){
+                showProducts += `${i+1}. ${databaseProducts[i].productName}. Rp.${databaseProducts[i].productPrice.toLocaleString('id-ID')}/${databaseProducts[i].productUnit} \n`}
+            return showProducts
+        }
+    </script>
+    
+    <script>
+        const productList = () => {
+            alert(showProducts())}
+    
+        const createProduct = () => {
+            alert('Wortel\nAnggur')}
+    
+        const updateProduct = () => {
+        let pageUpdate = Number(prompt(`List Update \n${showProducts()}\n Select Product to Update`));
+        if (pageUpdate >= 1 && pageUpdate <= databaseProducts.length) {
+            let newProductName = prompt('Input New Product Name');
+        let newProductPrice = Number(prompt('Input New Product Price'));
+        let newProductUnit = prompt('Input New Update Unit');
+        const productToUpdate = databaseProducts[pageUpdate - 1];
+        productToUpdate.productName = newProductName;
+        productToUpdate.productPrice = newProductPrice;
+        productToUpdate.productUnit = newProductUnit;
+        console.log('Product updated:', productToUpdate);
+
+        // Setelah mengupdate produk, panggil ulang fungsi productList
+        productList();
+    } else {
+        alert('Invalid product selection');
+    }
+        alert('Product Updated\n' + showProducts());
+                return; 
+    }
+            
+        const deleteProduct = () => {
+            alert('Wortel\nAnggur')}
+    
+        const Logout = () => {
+            alert('Wortel\nAnggur')}
+    
+    const home = () =>{
+            let name = 'Kiki'
+            let homepage = prompt(`Welcome Admin ${name}\n1.Product list \n2.Crete Product \n3.Update Product \n4.Delete Product \n5.Logout` )
+            if(homepage == 1){
+                productList()
+            }else if(homepage ==2){
+                createProduct()
+            }else if(homepage ==3){
+                updateProduct()
+            }else if(homepage == 4){
+                deleteProduct()
+            }else if(homepage == 5){
+                Logout()
+            }else{
+                alert('data tidak ditemukan')
+            }
+        }
+    
+    home()
+    </script>

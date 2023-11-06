@@ -1,0 +1,82 @@
+<script>
+class Users {
+    constructor(id, username, password){
+        this.id = id
+        this.username = username
+        this.password = password
+    }
+}
+const databaseUsers = [
+    new Users(1, "admin", "1234"),
+    new Users(2, "user", "1234"),
+]
+
+class Products {
+    constructor(id, productName, productPrice, productUnit){
+        this.id = id
+        this.productName = productName
+        this.productPrice = productPrice
+        this.productUnit = productUnit
+    }
+}
+
+const databaseProducts = [
+    new Products(1, "Mangga", 10000, "Kg"),
+    new Products(2, "Jeruk", 15000, "Unit"),
+]
+const showProducts = () => {
+        let showProducts = ""
+        for(let i=0; i<databaseProducts.length; i++){
+            showProducts += `${i+1}. ${databaseProducts[i].productName}. Rp.${databaseProducts[i].productPrice.toLocaleString('id-ID')}/${databaseProducts[i].productUnit} \n`}
+        return showProducts
+    }
+</script>
+
+<script>
+    const productList = () => {
+        alert(showProducts())}
+
+    const createProduct = () => {
+        alert('Wortel\nAnggur')}
+
+    const updateProduct = () => {
+        let pageUpdate = Number(prompt(`List Update \n${showProducts()}\n Select Product to Update`))
+        let newProductsName = prompt('Input New Product Name')
+        let newProductsPrice = Number(prompt('Input New Product Price'))
+        let newProductsUnit = prompt('Input New Update Unit')
+        for(let i=0 ; i<databaseProducts.length ; i++){
+        console.log(pageUpdate,newProductsName,newProductsPrice,newProductsUnit)
+        if(pageUpdate == databaseProducts[i].id){ // if error belum bisa balik
+            databaseProducts.splice(databaseProducts[i].id -1,1,[1,newProductsName,newProductsPrice,newProductsUnit])
+        }console.log(databaseProducts) // format kirim data masih error
+    }
+    alert('Product Updated\n' + showProducts());
+            return; 
+}
+        
+    const deleteProduct = () => {
+        alert('Wortel\nAnggur')}
+
+    const Logout = () => {
+        alert('Wortel\nAnggur')}
+
+const home = () =>{
+        let name = 'Kiki'
+        let homepage = prompt(`Welcome Admin ${name}\n1.Product list \n2.Crete Product \n3.Update Product \n4.Delete Product \n5.Logout` )
+        if(homepage == 1){
+            productList()
+        }else if(homepage ==2){
+            createProduct()
+        }else if(homepage ==3){
+            updateProduct()
+        }else if(homepage == 4){
+            deleteProduct()
+        }else if(homepage == 5){
+            Logout()
+        }else{
+            alert('data tidak ditemukan')
+        }
+    }
+
+home()
+</script>

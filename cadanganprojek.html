@@ -1,0 +1,20 @@
+<script>
+    const updateProduct = () => {
+    let pageUpdate = Number(prompt(`List Update \n${showProducts()}\n Select Product to Update`));
+    if (pageUpdate >= 1 && pageUpdate <= databaseProducts.length) {
+        let newProductName = prompt('Input New Product Name');
+        let newProductPrice = Number(prompt('Input New Product Price'));
+        let newProductUnit = prompt('Input New Update Unit');
+        const productToUpdate = databaseProducts[pageUpdate - 1];
+        productToUpdate.productName = newProductName;
+        productToUpdate.productPrice = newProductPrice;
+        productToUpdate.productUnit = newProductUnit;
+        console.log('Product updated:', productToUpdate);
+
+        // Setelah mengupdate produk, panggil ulang fungsi productList
+        productList();
+    } else {
+        alert('Invalid product selection');
+    }
+}
+</script>

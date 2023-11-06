@@ -1,0 +1,15 @@
+<script>
+    const xTwit = () => {
+        let failed = false
+        do{let tweet = prompt('Input your tweet')
+        if(tweet.length > 10){
+            alert('Error')
+            failed = true
+        }
+        if(tweet.length <10){
+        failed = false
+        }
+    }while (failed === true)
+}
+xTwit()
+</script>

@@ -1,0 +1,49 @@
+<script>
+    class product {
+        constructor(item,price){
+            this.item = item ,
+            this.price = price
+        }
+    }
+    const productMarket = [new product ('Apple',10000),new product('Orange',20000)]
+    
+    const createList = (_productMarket) => {
+            let listProducts = ''
+
+            for(let i=0; i<_productMarket.length;i++){
+                listProducts += `${i+1}. ${_productMarket[i].item} = Rp.${_productMarket[i].price.toLocaleString()}\n`
+            }
+            return listProducts
+        }
+    const app = () => {
+        let selectedMenu = 1
+        const cart = []
+        do{
+            const selectedProduct = Number(prompt(createList(productMarket)))-1
+            const productReal = productMarket[selectedProduct]
+            const qty = Number(prompt('Input Quantity'))
+
+            let productInCart = false
+            let idx = 0
+            for(let i = 0; i<cart.length; i++){
+                if(productReal.item === cart[i].item){
+                    productInCart = true
+                    idx = i
+                }
+            }
+        if(productInCart === true){
+            cart[idx].qty += qty
+        }else{
+            cart.push({item: productReal.item,qty: qty})
+        }
+        selectedMenu = prompt('Menu : \n 1. Select Product \n 2. Checkout')
+        }while(selectedMenu == 1)
+        
+        let output = ''
+        for(let i=0 ; i <cart.length; i++){
+            output += `${cart[i].item} = ${cart[i].qty} Qty\n`
+        }
+        alert(output)
+    }
+    app()
+</script>

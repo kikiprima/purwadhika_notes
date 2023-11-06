@@ -1,0 +1,33 @@
+<script>
+    <ul id="productList">
+        <li>1. Mangga - <span id="priceMangga">10000</span></li>
+        <li>2. Jeruk - <span id="priceJeruk">15000</span></li>
+    </ul>
+
+    <button onclick="updateProduct()">Update Harga Produk</button>
+
+    <>
+        function updateProduct() {
+            // Tampilkan prompt untuk meminta pilihan produk
+            const productList = "1. Mangga\n2. Jeruk";
+            const selectedProduct = parseInt(prompt("Pilih produk yang akan diupdate:\n" + productList));
+
+            if (selectedProduct === 1 || selectedProduct === 2) {
+                const newPrice = parseFloat(prompt("Masukkan harga baru untuk produk:"));
+                if (!isNaN(newPrice)) {
+                    if (selectedProduct === 1) {
+                        // Update harga Mangga
+                        document.getElementById('priceMangga').textContent = newPrice;
+                    } else if (selectedProduct === 2) {
+                        // Update harga Jeruk
+                        document.getElementById('priceJeruk').textContent = newPrice;
+                    }
+                    alert("Harga produk berhasil diperbarui!");
+                } else {
+                    alert("Input harga tidak valid.");
+                }
+            } else {
+                alert("Pilihan produk tidak valid.");
+            }
+        }
+</script>

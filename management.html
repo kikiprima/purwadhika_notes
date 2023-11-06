@@ -1,0 +1,145 @@
+<!-- Database -->
+<script>
+   class Users {
+    constructor(id, username, password){
+        this.id = id
+        this.username = username
+        this.password = password
+    }
+}
+    const databaseUsers = [
+        new Users(1, "admin", "1234"),
+        new Users(2, "user", "1234"),
+    ]
+
+    class Products {
+        constructor(id, productName, productPrice, productUnit){
+            this.id = id
+            this.productName = productName
+            this.productPrice = productPrice
+            this.productUnit = productUnit
+        }
+    }
+
+    const databaseProducts = [
+        new Products(1, "Mangga", 10000, "Kg"),
+        new Products(2, "Jeruk", 15000, "Unit"),
+    ]
+</script>
+
+<!-- Utils Function -->
+<script>
+    const showProducts = () => {
+        let showProducts = ""
+        for(let i=0; i<databaseProducts.length; i++){
+            showProducts += `${i+1}. ${databaseProducts[i].productName}. Rp.${databaseProducts[i].productPrice.toLocaleString('id-ID')}/${databaseProducts[i].productUnit} \n`}
+        return showProducts
+    }
+
+    const listProduct = () => {
+        alert(showProducts())
+    }
+
+    const addProduct = () => {
+        let continueAddProductProcess = false;
+        let products = [...databaseProducts];
+        do{
+            let product = []
+            const productName = prompt("Input product name");
+            let checkProduct = products.find(val => {
+                return val.productName === productName
+            });
+            if(checkProduct) {
+                alert("Produk sudah ditambahkan sebelumnya")
+                continue;
+            }
+            product.productName = productName;
+            const productPrice = Number(prompt("Input price"));
+            product.productPrice = productPrice;
+            const productUnit = prompt("Input units");
+            product.productUnit = productUnit;
+            databaseProducts.push(product);
+            alert("Produk berhasil ditambahkan");
+            continueAddProductProcess = true
+            continue;
+        }while(!continueAddProductProcess)
+    }
+
+    const updateProduct = () => {
+        let pageUpdate = Number(prompt(`List Update \n${showProducts()}\n Select Product to Update`));
+        if (pageUpdate >= 1 && pageUpdate <= databaseProducts.length) {
+            let newProductName = prompt('Input New Product Name');
+            let newProductPrice = Number(prompt('Input New Product Price'));
+            let newProductUnit = prompt('Input New Update Unit');
+            const productToUpdate = databaseProducts[pageUpdate - 1];
+            
+            productToUpdate.productName = newProductName;
+            productToUpdate.productPrice = newProductPrice;
+            productToUpdate.productUnit = newProductUnit;
+        }
+    }
+
+    const deleteProduct = () => {
+        const indexWantToDelete = prompt(`${showProducts()} \nSelect Product to delete`)
+        
+        const dataIndex = databaseProducts[indexWantToDelete-1]
+
+        const getIndex = databaseProducts.indexOf(dataIndex)
+        console.log(indexWantToDelete)
+        console.log(dataIndex)
+        console.log(getIndex)
+
+        if(getIndex > -1){
+            databaseProducts.splice(getIndex, 1)
+        }
+    }
+
+    const logout = () => {
+        islogin = false
+        alert("Logout Success")
+    }
+</script>
+
+<!-- Controller -->
+<script>
+    let islogin = false
+
+    const homePage = () => {
+        const selectFeature = prompt(`Welcome ${islogin} \n1. Product List \n2. Create Product \n3. Update Produk \n4. Delete Produk \n5. Logout` )
+        
+        if(selectFeature == 1){
+            listProduct()
+        }else if(selectFeature == 2){
+            addProduct()
+        }else if(selectFeature == 3){
+            updateProduct()
+        }else if(selectFeature == 4){
+            deleteProduct()
+        }else if(selectFeature == 5){
+            logout()
+        }else{
+            alert("Error")
+        }
+    }
+
+    const login = () => {
+        let username = prompt('Your Username: ')
+        let password = prompt ('Your Password: ')
+        for( i=0; i<databaseUsers.length; i++){
+            if(username == databaseUsers[i].username && password == databaseUsers[i].password){
+                islogin = username 
+            }
+        }
+    }
+</script>
+
+<!-- Route -->
+<script>
+    do{
+        login()
+    }while(!islogin)
+
+    do{
+        homePage()
+    }while(islogin)
+</script>
