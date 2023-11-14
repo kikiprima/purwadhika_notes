@@ -1,0 +1,51 @@
+<script>
+    class Products {
+        constructor(id,productName,productStocks,productPrice,productUnit){
+            this.id = id ;
+            this.productName = productName ;
+            this.productStocks = productStocks ;
+            this.productPrice = productPrice ;
+            this.productUnit = productUnit
+        }
+    }
+    const databaseProducts = [
+        new Products(1, "Lobak", 100 , 15000,"kg"),
+        new Products(2,"Sawi",50,5000,"ikat"),
+        new Products(1,"Kol",30,6000,"kg")
+    ]
+    const showProducts = () => {
+         let showProducts = ""
+         for(let i=0; i<databaseProducts.length; i++){
+         showProducts += `${i+1}. ${databaseProducts[i].productName} (Stock :${databaseProducts[i].productStocks}) Rp.${databaseProducts[i].productPrice.toLocaleString('id-ID')}/${databaseProducts[i].productUnit} \n`}
+         return showProducts
+     }
+     const showMenu = () => {
+        const selectedMenuIndex = prompt(`Select Our Produck !\n${showProducts()}`);
+        const selectedMenu = databaseProducts[selectedMenuIndex -1]
+        if (selectedMenu) {
+            const qty = Number(prompt(`How Many ${selectedMenu.productUnit} of ${selectedMenu.productName} do you want to buy?`))
+        }if (qty <= selectedMenu.productStocks) {
+            selectedMenu.cartQty = qty; // Mengatur jumlah barang dalam keranjang
+            alert(`You added ${qty} ${selectedMenu.productUnit} of ${selectedMenu.productName} to your cart.`);
+        } else {alert ("Invalid quantity or not enough stock.");
+     }
+    }
+</script>
+
+
+<script>
+
+    const homeMenu = () => {
+        const selectedMenu = Number(prompt(`1.Buy Menu \n2.See Your Cart \n3.Checkout`))
+
+        if(selectedMenu === 1){
+            showMenu()
+        }else if(selectedMenu ===2){
+            seeYourCart()
+        }else if(selectedMenu ===3){
+            checkOut()
+        }
+    }
+homeMenu()
+
+</script>

@@ -1,0 +1,148 @@
+<!-- Database -->
+<script>
+    class Products {
+        constructor(productId, productName, productPrice, productStock, productUnit){
+            this.productId = productId
+            this.productName = productName
+            this.productPrice = productPrice
+            this.productStock = productStock
+            this.productUnit = productUnit
+        }
+    }
+
+    const databaseProducts = [
+        new Products(1, "Lobak", 10000, 100, "Kg"),
+        new Products(2, "Sawi", 5000, 50, "Ikat"),
+        new Products(3, "Kol", 6000, 30, "Kg"),
+    ]
+
+    // Variabel untuk menampung keranjang
+    let cart = []
+</script>
+
+<!-- Utils Function -->
+<script>
+    // Fungsi untuk mengambil data produk di database produk berdasarkan parameter index
+    const getProduct = (index) => {
+        return databaseProducts[index]
+    }
+
+    // Fungsi untuk menampilkan seluruh data produk di database produk
+    const showProducts = () => {
+            let result = ""
+            for(let i=0; i<databaseProducts.length; i++){
+                result += `${i+1}. ${databaseProducts[i].productName} (Stock: ${databaseProducts[i].productStock}) = Rp.${databaseProducts[i].productPrice.toLocaleString('id-ID')}/${databaseProducts[i].productUnit}\n`
+            }
+            return result
+        }
+
+    // Fungsi Tambah Produk Ke Keranjang 
+    const buyItem = () => {
+
+        // User memilih produk
+        const selectProduct = prompt(`Select Our Product \n${showProducts()}`)
+        let qtyEnough = false
+        const getIdProduct = selectProduct-1
+
+        do{
+            // User input quantity dari produk yang dipilih
+            const inputQuantityOfProduct = Number(prompt("Input Quantity of Product:"))
+            
+            // Sistem cek apakah stock cukup berdaarkan quantity yang diinput
+            if(inputQuantityOfProduct <= getProduct(getIdProduct).productStock ){
+                qtyEnough = true        
+
+                // Validasi untuk menentukan apakah barang yang dipilih itu sudah ada sebelumnya? Jika sudah ada, yang ditambahkan quantity. Jika belum, yang dipush cartnya
+                if(cart[getIdProduct]){
+                    
+                    // Validasi apakah stock barang + quantity yang diinput itu cukup sesuai stock produk di database 
+                    if((cart[getIdProduct].inputQuantityOfProduct + inputQuantityOfProduct) > databaseProducts[getIdProduct].productStock){
+                        alert("Qty melebihi stock barang di keranjang")
+                        break
+                    }else{
+                        cart[getIdProduct].inputQuantityOfProduct += inputQuantityOfProduct
+                        alert("Product Added to cart")
+                        break
+                    }
+                }else if(!cart[getIdProduct]){
+                    cart.push({getIdProduct, inputQuantityOfProduct})
+                    alert("Product Added to cart")
+                    break
+                }
+            }else if (inputQuantityOfProduct > getProduct(getIdProduct).productStock){
+                alert("Quantity pemesanan melebihi stock!")
+            }
+        }while(!qtyEnough)
+    }
+
+    // Fungsi menampilkan produk di cart
+    const seeCart = () => {
+        let result = ""
+
+        for(let i=0; i<cart.length; i++){
+            result += `${i+1}. ${databaseProducts[cart[i].getIdProduct].productName} = Rp. ${databaseProducts[cart[i].getIdProduct].productPrice.toLocaleString('id-ID')}/${databaseProducts[cart[i].getIdProduct].productUnit} x ${cart[i].inputQuantityOfProduct} = Rp. ${(cart[i].inputQuantityOfProduct * databaseProducts[cart[i].getIdProduct].productPrice).toLocaleString('id-ID')} \n`
+        }
+
+        return result
+    }
+
+    // Fungsi menampilkan produk di checkout
+    const generateCheckout = (cart) => {
+        let result = ""
+        let resultPrice = 0
+        for(let i=0; i<cart.length; i++){
+            result += `${i+1}. ${databaseProducts[cart[i].getIdProduct].productName} = Rp. ${databaseProducts[cart[i].getIdProduct].productPrice.toLocaleString('id-ID')}/${databaseProducts[cart[i].getIdProduct].productUnit} x ${cart[i].inputQuantityOfProduct} = Rp. ${(cart[i].inputQuantityOfProduct * databaseProducts[cart[i].getIdProduct].productPrice).toLocaleString('id-ID')} \n`
+            resultPrice += (cart[i].inputQuantityOfProduct * databaseProducts[cart[i].getIdProduct].productPrice)
+        }
+
+        result += `----------------+ \nTotal Belanja = Rp. ${resultPrice.toLocaleString('id-ID')}`
+
+        return {result, resultPrice}
+    }
+
+    // Fungsi checkout dan validasi total uang yang diinput cukup
+    const checkoutPage = () => {
+        let validateCash = false
+        do{
+            const cash = prompt(generateCheckout(cart)['result'])
+
+            if(cash < generateCheckout(cart)['resultPrice']){
+                alert("Uang tidak cukup")
+            }else if (cash >= generateCheckout(cart)['resultPrice']){
+                for(let i=0; i<cart.length; i++){
+                    databaseProducts[cart[i].getIdProduct].productStock -= cart[i].inputQuantityOfProduct
+                }
+                alert("Transaksi Berhasil")
+                checkout = true
+                validateCash = true
+                cart = []
+            }
+        }while(!validateCash)
+    }
+</script>
+
+<!-- Route -->
+<script>
+    // Fungsi untuk menentukan menu yang dipilih
+    const homePage = () => {
+        const selectMenu = prompt(`1. Buy Item \n2. See Your Cart \n3. Checkout`)
+
+        if(selectMenu == 1){
+            buyItem()
+        }else if(selectMenu == 2){
+            alert(seeCart())
+        }else if (selectMenu == 3){
+            checkoutPage()
+        }else{
+            alert("Error")
+        }
+    }
+</script>
+
+<!-- Controller -->
+<script>
+    let checkout = false
+    do{
+        homePage()
+    }while(!checkout)
+</script>

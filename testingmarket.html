@@ -1,0 +1,72 @@
+<script>
+    class Products {
+    constructor(id, productName, productStocks, productPrice, productUnit) {
+        this.id = id;
+        this.productName = productName;
+        this.productStocks = productStocks;
+        this.productPrice = productPrice;
+        this.productUnit = productUnit;
+        this.cartQty = 0; // Menambahkan properti cartQty untuk melacak jumlah barang dalam keranjang
+    }
+}
+
+const databaseProducts = [
+    new Products(1, "Lobak", 100, 15000, "kg"),
+    new Products(2, "Sawi", 50, 5000, "ikat"),
+    new Products(3, "Kol", 30, 6000, "kg")
+];
+
+const showProducts = () => {
+    let showProducts = "";
+    for (let i = 0; i < databaseProducts.length; i++) {
+        showProducts += `${i + 1}. ${databaseProducts[i].productName} (Stock: ${databaseProducts[i].productStocks}) Rp.${databaseProducts[i].productPrice.toLocaleString('id-ID')}/${databaseProducts[i].productUnit} \n`;
+    }
+    return showProducts;
+};
+
+const showMenu = () => {
+    const selectedProductIndex = prompt(`Select Our Product!\n${showProducts()}`);
+    const selectedProduct = databaseProducts[selectedProductIndex - 1];
+
+    if (selectedProduct) {
+        const qty = Number(prompt(`How many ${selectedProduct.productUnit} of ${selectedProduct.productName} do you want to buy?`));
+        if (qty <= selectedProduct.productStocks) {
+            selectedProduct.cartQty = qty; // Mengatur jumlah barang dalam keranjang
+            alert(`You added ${qty} ${selectedProduct.productUnit} of ${selectedProduct.productName} to your cart.`);
+        } else {
+            alert("Invalid quantity or not enough stock.");
+        }
+    } else {
+        alert("Invalid product selection.");
+    }
+};
+
+const seeYourCart = () => {
+    // Tambahkan kode untuk melihat isi keranjang belanja di sini
+};
+
+const checkOut = () => {
+    // Tambahkan kode untuk proses checkout di sini
+};
+
+const homeMenu = () => {
+    const selectedMenu = Number(prompt(`1. Buy Menu\n2. See Your Cart\n3. Checkout`));
+
+    if (selectedMenu === 1) {
+        showMenu();
+    } else if (selectedMenu === 2) {
+        seeYourCart();
+    } else if (selectedMenu === 3) {
+        checkOut();
+    }
+};
+
+homeMenu();
+// Dalam kode di atas, kami menambahkan properti cartQty ke objek produk dan memberikan pengguna kesempatan untuk memasukkan jumlah yang ingin dibeli. Jumlah tersebut kemudian disimpan dalam properti cartQty. Anda dapat mengganti atau menambahkan lebih banyak logika untuk melihat dan memproses keranjang belanja sesuai kebutuhan Anda.
+
+
+
+
+
+
+</script>
