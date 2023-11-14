@@ -1,0 +1,20 @@
+/* Tag, Class, Id */
+
+/* Tag Selector */
+div{
+    color: rgb(255, 105, 225);
+}
+
+span{
+    color: rgb(255, 0, 13);
+}
+
+/* Id Selector */
+#title{
+    color: rgb(0, 21, 128);
+}
+
+/* Class Selector */
+.newtitle{
+    color: rgb(248, 134, 13);
+}
