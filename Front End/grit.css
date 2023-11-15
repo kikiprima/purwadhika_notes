@@ -1,0 +1,111 @@
+.container{
+    border: solid rgb(14, 14, 15);
+    background-color: aquamarine;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+.container div:nth-child(even){
+    height: 100px;
+    background-color: brown;
+}
+
+.container div:nth-child(odd){
+    height: 100px;
+    background-color: rgb(119, 106, 106);
+}
+
+.wrapper{
+    background-color: rgb(251, 250, 254);
+    display:grid;
+    grid-template-rows: repeat(9,1fr)
+}
+
+.wrapper div:nth-child(even){
+    background-color: darkslategray;
+    height: 100px;
+    width: 100%;
+}
+
+.wrapper div:nth-child(odd){
+    background-color: rgb(14, 247, 247);
+    height: 100px;
+    width: 100px;
+}
+
+.parent{
+    height: 300px;
+    background-color: red;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: 1fr 2fr 3fr;
+}
+
+.parent div:nth-child(even){
+    background-color: red;
+}
+.parent div:nth-child(odd){
+    background-color: white;
+}
+
+.wrapping{
+    height: 200px;
+    background-color: color-mix(in hwb increasing hue, color percentage, color percentage);
+    display: grid;
+    grid-template-columns: repeat(9,1fr);
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+}
+
+.wrapping div:nth-child(odd){
+    background-color: white;
+}
+.wrapping div:nth-child(even){
+    background-color: green;
+}
+.child-01{
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+.child-02{
+    grid-column-start: 4;
+    grid-column-end: 10;
+}
+
+.kosong{
+    height: 200px;
+    background-color: color-mix(in hwb increasing hue, color percentage, color percentage);
+    display: grid;
+    grid-template-columns: repeat(9,1fr);
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.kosong div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.kosong div:nth-child(odd){
+    background-color: rgb(203, 9, 9);
+}
+.kosong div:nth-child(even){
+    background-color: green;
+}
+.kelas1{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+.kelas2{
+    grid-column-start: 3;
+    grid-column-end: 10;
+}
+
+.kelas3{
+    grid-row-start: 2;
+    grid-row-end: 4;
+}
+.kelas3{
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
